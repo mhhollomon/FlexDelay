@@ -41,15 +41,15 @@ juce_add_plugin(FlexDelay
     # VERSION ...                               # Set this if the plugin version is different to the project version
     # ICON_BIG ...                              # ICON_* arguments specify a path to an image file to use as an icon for the Standalone
     # ICON_SMALL ...
-    # COMPANY_NAME ...                          # Specify the name of the plugin's author
+     COMPANY_NAME CodeVamping                          # Specify the name of the plugin's author
     # IS_SYNTH TRUE/FALSE                       # Is this a synth or an effect?
     # NEEDS_MIDI_INPUT TRUE/FALSE               # Does the plugin need midi input?
     # NEEDS_MIDI_OUTPUT TRUE/FALSE              # Does the plugin need midi output?
     # IS_MIDI_EFFECT TRUE/FALSE                 # Is this plugin a MIDI effect?
     # EDITOR_WANTS_KEYBOARD_FOCUS TRUE/FALSE    # Does the editor need keyboard focus?
     # COPY_PLUGIN_AFTER_BUILD TRUE/FALSE        # Should the plugin be installed to a default location after building?
-    PLUGIN_MANUFACTURER_CODE Juce               # A four-character manufacturer id with at least one upper-case character
-    PLUGIN_CODE Dem0                            # A unique four-character plugin id with exactly one upper-case character
+    PLUGIN_MANUFACTURER_CODE CVmp               # A four-character manufacturer id with at least one upper-case character
+    PLUGIN_CODE Fdly                            # A unique four-character plugin id with exactly one upper-case character
                                                 # GarageBand 10.3 requires the first letter to be upper-case, and the remaining letters to be lower-case
     FORMATS VST3                                # The formats to build. Other valid formats are: AAX Unity VST AU AUv3
     PRODUCT_NAME "FlexDelay")        # The name of the final executable, which can differ from the target name
@@ -60,7 +60,7 @@ juce_add_plugin(FlexDelay
 # include all your JUCE module headers; if you're happy to include module headers directly, you
 # probably don't need to call this.
 
-# juce_generate_juce_header(AudioPluginExample)
+juce_generate_juce_header(FlexDelay)
 
 # `target_sources` adds source files to a target. We pass the target that needs the sources as the
 # first argument, then a visibility parameter for the sources which should normally be PRIVATE.
