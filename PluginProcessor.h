@@ -1,23 +1,35 @@
+/*
+  ==============================================================================
+
+    This file contains the basic framework code for a JUCE plugin processor.
+
+  ==============================================================================
+*/
+
 #pragma once
 
-#include <juce_audio_processors/juce_audio_processors.h>
+#include <JuceHeader.h>
+#include "StereoDelayElement.h"
 
 //==============================================================================
-class AudioPluginAudioProcessor  : public juce::AudioProcessor
+/**
+*/
+class FlexDelayAudioProcessor  : public juce::AudioProcessor
 {
 public:
     //==============================================================================
-    AudioPluginAudioProcessor();
-    ~AudioPluginAudioProcessor() override;
+    FlexDelayAudioProcessor();
+    ~FlexDelayAudioProcessor() override;
 
     //==============================================================================
     void prepareToPlay (double sampleRate, int samplesPerBlock) override;
     void releaseResources() override;
 
+   #ifndef JucePlugin_PreferredChannelConfigurations
     bool isBusesLayoutSupported (const BusesLayout& layouts) const override;
+   #endif
 
     void processBlock (juce::AudioBuffer<float>&, juce::MidiBuffer&) override;
-    using AudioProcessor::processBlock;
 
     //==============================================================================
     juce::AudioProcessorEditor* createEditor() override;
@@ -42,7 +54,25 @@ public:
     void getStateInformation (juce::MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
 
+    //==============================================================================
+    double target_main_output_level = 0.0;
+    double target_wet_mix = 50.0;
+    double target_delay_msec = 200;
+
 private:
     //==============================================================================
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (AudioPluginAudioProcessor)
+    double current_main_output_level = 0.0;
+    double scale_factor = 1.0;
+    StereoDelayElement delay_element;
+
+    double current_delay_msec = 200;
+    int sample_rate_ = 100;
+    int delay_samples = 100;
+
+    void calculate_scale_factor();
+
+    void delay(int channel, const std::vector<double>& input, std::vector<double>& output);
+
+    
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (FlexDelayAudioProcessor)
 };

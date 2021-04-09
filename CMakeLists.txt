@@ -70,7 +70,9 @@ juce_add_plugin(FlexDelay
 target_sources(FlexDelay
     PRIVATE
         PluginEditor.cpp
-        PluginProcessor.cpp)
+        PluginProcessor.cpp
+        DelayLine.cpp
+        StereoDelayElement.cpp)
 
 # `target_compile_definitions` adds some preprocessor definitions to our target. In a Projucer
 # project, these might be passed in the 'Preprocessor Definitions' field. JUCE modules also make use
